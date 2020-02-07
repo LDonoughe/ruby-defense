@@ -1,10 +1,16 @@
 # frozen_string_literal: true
 
+# to make debugging easier
+require 'pry'
+require 'extra_print'
+
 class Game
   def initialize
     @state = Hash.new('.')
     @state[[3, 5]] = 'R'
   end
+
+  attr_reader :state
 
   def attack_phase
     until @state['elk'].empty?
@@ -24,13 +30,13 @@ class Game
     add_element_to_state(e)
   end
 
-  def place_tower(x,y)
-    t = Tower.new(x,y)
-    current = @state[[x,y]]
-    if current = '.'
+  def place_tower(x, y)
+    t = Tower.new(x, y)
+    current = @state[[x, y]]
+    if current == '.'
       add_element_to_state(t)
     else
-      return false
+      false
     end
   end
 
@@ -46,19 +52,17 @@ class Game
     end
   end
 
-  private
-
   def add_element_to_state(element)
-    require 'pry'; binding.pry
-    @state_array = @state[element.class.to_s.downcase]
-    if @state_array.kind_of? Array
-      @state_array += [element]
+    state_array = @state[element.class.to_s.downcase]
+    if state_array.is_a? Array
+      state_array += [element]
     else
-      @state_array = [element]
+      state_array = [element]
     end
+
+    @state[element.class.to_s.downcase] = state_array
     @state[[element.x, element.y]] = element
   end
-
 end
 
 class Tower
@@ -91,11 +95,12 @@ class Elk
     y_old = @y
     @y = y || @y
     @x = if @ruby
-      x || @x + 1
-    else
-      x || @x - 1
+           x || @x + 1
+         else
+           x || @x - 1
     end
-    return false if state[[@x, @y]].kind_of? Tower
+    return false if state[[@x, @y]].is_a? Tower
+
     @ruby = true if state[[@x, @y]] == 'R'
     state[[x_old, y_old]] = '.'
     state[[@x, @y]] = self
@@ -113,7 +118,7 @@ g.display
 
 # puts "Place Towers"
 # g.build_phase
-g.place_tower(4,5)
+g.place_tower(4, 5)
 
 puts 'Elk will now attack the ruby'
 
