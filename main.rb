@@ -21,12 +21,17 @@ class Game
 
   def add_elk
     e = Elk.new(60, 5)
-    if @state['elk'].is_a? Array
-      @state['elk'] += [e]
+    add_element_to_state(e)
+  end
+
+  def place_tower(x,y)
+    t = Tower.new(x,y)
+    current = @state[[x,y]]
+    if current = '.'
+      add_element_to_state(t)
     else
-      @state['elk'] = [e]
+      return false
     end
-    @state[[60, 5]] = e
   end
 
   def display
@@ -40,6 +45,34 @@ class Game
       puts a.join
     end
   end
+
+  private
+
+  def add_element_to_state(element)
+    require 'pry'; binding.pry
+    @state_array = @state[element.class.to_s.downcase]
+    if @state_array.kind_of? Array
+      @state_array += [element]
+    else
+      @state_array = [element]
+    end
+    @state[[element.x, element.y]] = element
+  end
+
+end
+
+class Tower
+  def initialize(x, y)
+    @x = x
+    @y = y
+  end
+
+  attr_reader :x
+  attr_reader :y
+
+  def to_s
+    'T'
+  end
 end
 
 class Elk
@@ -50,6 +83,7 @@ class Elk
   end
 
   attr_reader :x
+  attr_reader :y
   attr_reader :ruby
 
   def update_position(state, x, y)
@@ -57,10 +91,11 @@ class Elk
     y_old = @y
     @y = y || @y
     @x = if @ruby
-           x || @x + 1
-         else
-           x || @x - 1
-         end
+      x || @x + 1
+    else
+      x || @x - 1
+    end
+    return false if state[[@x, @y]].kind_of? Tower
     @ruby = true if state[[@x, @y]] == 'R'
     state[[x_old, y_old]] = '.'
     state[[@x, @y]] = self
@@ -78,6 +113,7 @@ g.display
 
 # puts "Place Towers"
 # g.build_phase
+g.place_tower(4,5)
 
 puts 'Elk will now attack the ruby'
 
