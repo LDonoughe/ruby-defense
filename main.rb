@@ -93,13 +93,18 @@ class Elk
   def update_position(state, x, y)
     x_old = @x
     y_old = @y
-    @y = y || @y
-    @x = if @ruby
+    y_new = y || @y
+    x_new = if @ruby
            x || @x + 1
          else
            x || @x - 1
     end
-    return false if state[[@x, @y]].is_a? Tower
+    # eap state[[@x, @y]]
+    # eap state[[x_new, y_new]].is_a? Tower
+    # eap state[[@x, @y]].class
+    return false if state[[x_new, y_new]].is_a? Tower
+    @x = x_new
+    @y = y_new
 
     @ruby = true if state[[@x, @y]] == 'R'
     state[[x_old, y_old]] = '.'
