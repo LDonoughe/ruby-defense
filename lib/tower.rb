@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'pry'
+
 class Tower
   def initialize(x, y)
     @x = x
@@ -11,7 +13,8 @@ class Tower
   attr_reader :y
 
   def within_range(x, y)
-    Math.sqrt((@x**2 - x**2) + (@y**2 - y**2)) < @range
+    # binding.pry
+    Math.sqrt(((@x - x)**2 + (@y - y)**2).abs) < @range
   end
 
   def to_s
