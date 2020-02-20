@@ -24,6 +24,14 @@ class Game
     end
   end
 
+  def towers_attack
+    @state['towers'].each do |t|
+      
+      e = t.closest_elk(@state)
+      @state[[e.x,e.y]] = '.' if t.within_range(e.x,e.y)
+    end
+  end
+
   def add_elk
     e = Elk.new(60, 5)
     add_element_to_state(e)
