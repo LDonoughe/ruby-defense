@@ -16,13 +16,11 @@ class Tower
     Math.sqrt(((@x - x)**2 + (@y - y)**2).abs) < @range
   end
 
-  def closest_elk_within_range(state)
-    e = false
-    (1..9).each do |y|
-      (2..60).each do |x|
-        a += [state[[x, y]]]
-      end
+  def get_elk_within_range(state)
+    state['elk'].each do |elk|
+      return elk if within_range(elk.x, elk.y)
     end
+    return false
   end
 
   def xa(x)

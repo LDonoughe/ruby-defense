@@ -13,6 +13,8 @@ class Game
 
   def attack_phase
     until @state['elk'].empty?
+      sleep 0.2
+      towers_attack
       @state['elk'].each do |e|
         e.update_position(@state, false, false)
         display
@@ -26,9 +28,11 @@ class Game
 
   def towers_attack
     @state['towers'].each do |t|
-      
-      e = t.closest_elk(@state)
-      @state[[e.x,e.y]] = '.' if t.within_range(e.x,e.y)
+      e = t.get_elk_within_range(@state)
+      if e
+        @state[[e.x,e.y]] = '.'
+        @state['elk'] = @state['elk'] - [e]
+      end
     end
   end
 
@@ -39,6 +43,11 @@ class Game
 
   def place_tower(x, y)
     t = Tower.new(x, y)
+    if @state['towers'] == '.'
+      @state['towers'] = [t]
+    else
+      @state['towers'] += [t]
+    end
     current = @state[[x, y]]
     if current == '.'
       add_element_to_state(t)
