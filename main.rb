@@ -14,7 +14,10 @@ g.place_tower(4, 5)
 
 puts 'Elk will now attack the ruby'
 
-g.add_elk
-g.display
-
-g.attack_phase
+while true do
+  (1..5).each do
+    g.add_elk
+  end
+  g.display
+  g.attack_phase
+end

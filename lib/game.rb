@@ -37,7 +37,13 @@ class Game
   end
 
   def add_elk
-    e = Elk.new(60, 5)
+    x = 60
+    y = rand(1..9)
+    if @state[[x,y]].is_a? Elk
+      add_elk
+    else
+      e = Elk.new(x, y)
+    end
     add_element_to_state(e)
   end
 
