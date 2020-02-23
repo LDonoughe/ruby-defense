@@ -40,7 +40,7 @@ class Game
     x = 60
     y = rand(1..9)
     if @state[[x,y]].is_a? Elk
-      add_elk
+      return add_elk
     else
       e = Elk.new(x, y)
     end

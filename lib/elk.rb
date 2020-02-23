@@ -20,8 +20,8 @@ class Elk
             else
               x || @x - 1
     end
-    # Come back to this later as I don't want wins to be this easy
-    return false if state[[x_new, y_new]].is_a? Tower
+    # Uncomment to disable Elks destroying towers
+    # return false if state[[x_new, y_new]].is_a? Tower
 
     @x = x_new
     @y = y_new

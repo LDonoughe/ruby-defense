@@ -1,20 +1,23 @@
 # frozen_string_literal: true
 
-# to make debugging easier
-require 'pry'
-require 'extra_print'
 require_relative './lib/game.rb'
 
 g = Game.new
 g.display
 
-# puts "Place Towers"
-# g.build_phase
-g.place_tower(4, 5)
-
-puts 'Elk will now attack the ruby'
-
-while true do
+(1..9999999).each do |wave|
+  puts "Defend the Ruby from the Elk. Wave #{wave}"
+  if wave == 1
+    puts "Place Towers"
+    (1..3).each do |n|
+      puts "Placing Tower #{n}/3, input x coordinate"
+      x = gets.to_i
+      puts "Placing Tower #{n}/3, input y coordinate for x = #{x}"
+      y = gets.to_i
+      g.place_tower(x,y)
+    end
+  end
+  puts 'Elk will now attack the ruby'
   (1..5).each do
     g.add_elk
   end
