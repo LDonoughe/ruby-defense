@@ -14,15 +14,13 @@ class Elk
   def update_position(state, x, y)
     x_old = @x
     y_old = @y
-    y_new = y || @y
-    x_new = if @ruby
-              x || @x + 1
-            else
-              x || @x - 1
+    if x_old == 3 && !@ruby
+      x_new = x || @x
+      y_new = @y > 5 ? @y - 1 : @y + 1
+    else
+      y_new = y || @y
+      x_new = @ruby ? (x || @x + 1) : (x || @x - 1)
     end
-    # Uncomment to disable Elks destroying towers
-    # return false if state[[x_new, y_new]].is_a? Tower
-
     @x = x_new
     @y = y_new
 

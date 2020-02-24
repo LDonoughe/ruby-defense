@@ -13,6 +13,15 @@ Configure asdf ruby
 # Setup:
 `bundle` (this is short for `bundle install`)
 
+# Tests
+running `rspec` or `bundle exec rspec` from the root directory to run the specs
+
 # To Run:
 cd /path/to/ruby-defense folder
 run `ruby main.rb`
+
+# TODO
+[] Fix state management so game can enter loss state properly
+[] increase number of elk per wave as time goes on
+[] Scoring mechanism/antlers
+[] (additional) tower purchasing
