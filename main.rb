@@ -18,7 +18,7 @@ g.display
     end
   end
   puts 'Elk will now attack the ruby'
-  (1..5).each do
+  (1..(wave * 5)).each do
     g.add_elk
   end
   g.display

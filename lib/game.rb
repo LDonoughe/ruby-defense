@@ -2,6 +2,7 @@
 
 require_relative './tower.rb'
 require_relative './elk.rb'
+require 'extra_print'
 
 class Game
   def initialize
@@ -15,19 +16,20 @@ class Game
     until @state['elk'].empty?
       sleep 0.2
       towers_attack
+      display
       @state['elk'].each do |e|
         e.update_position(@state, false, false)
-        display
         if e.x == 61
           puts 'Elk Have Captured the Ruby. Game Over'
           return true
         end
       end
+      display
     end
   end
 
   def towers_attack
-    @state['towers'].each do |t|
+    @state['tower'].each do |t|
       e = t.get_elk_within_range(@state)
       if e
         @state[[e.x,e.y]] = '.'
@@ -36,11 +38,11 @@ class Game
     end
   end
 
-  def add_elk
+  def add_elk(try: 0)
     x = 60
     y = rand(1..9)
     if @state[[x,y]].is_a? Elk
-      return add_elk
+      try < 5 ? (return add_elk(try: (try + 1))) : e = Elk.new(x - 1, y)
     else
       e = Elk.new(x, y)
     end
@@ -49,11 +51,6 @@ class Game
 
   def place_tower(x, y)
     t = Tower.new(x, y)
-    if @state['towers'] == '.'
-      @state['towers'] = [t]
-    else
-      @state['towers'] += [t]
-    end
     current = @state[[x, y]]
     if current == '.'
       add_element_to_state(t)
@@ -67,7 +64,7 @@ class Game
     puts a.join
     (1..9).each do |y|
       a = [y]
-      (2..60).each do |x|
+      (1..60).each do |x|
         a += [@state[[x, y]].to_s]
       end
       puts a.join

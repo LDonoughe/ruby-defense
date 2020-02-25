@@ -1,9 +1,24 @@
 # frozen_string_literal: true
 
 require './game.rb'
-# require 'extra_print'
 
 RSpec.describe Game do
+  describe '#place_tower' do
+    it 'creates a tower' do
+      g = Game.new
+      towers = g.send(:state)['tower']
+      expect(towers).to eq '.'
+
+      g.place_tower(1,1)
+      state = g.send(:state)
+      towers = state['tower']
+      expect(towers.length).to eq 1
+      expect(towers.first.is_a? Tower).to eq true
+
+      expect(state[[1,1]].to_s).to eq 'T'
+    end
+  end
+
   describe '#add_element_to_state' do
     it 'creates array with element when it doesn\'t exist' do
       g = Game.new

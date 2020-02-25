@@ -22,6 +22,6 @@ run `ruby main.rb`
 
 # TODO
 [] Fix state management so game can enter loss state properly
-[] increase number of elk per wave as time goes on
+[] properly increase number of elk per wave as time goes on
 [] Scoring mechanism/antlers
 [] (additional) tower purchasing
