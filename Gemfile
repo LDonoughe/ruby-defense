@@ -2,6 +2,9 @@
 
 source 'https://rubygems.org'
 
+# needed for playing as well
+gem 'curses'
+
 # dev/test
 gem 'extra_print'
 gem 'pry_debug'

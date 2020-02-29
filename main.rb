@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
+require 'curses'
+
 require_relative './lib/game.rb'
+
+Curses.init_screen
+begin
+  nb_lines = Curses.lines
+  nb_cols = Curses.cols
+ensure
+  Curses.close_screen
+end
+
+puts "Number of rows: #{nb_lines}"
+puts "Number of columns: #{nb_cols}"
 
 g = Game.new
 g.display
