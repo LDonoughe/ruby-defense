@@ -32,7 +32,7 @@ class Game
     @state['tower'].each do |t|
       e = t.get_elk_within_range(@state)
       if e
-        @state[[e.x,e.y]] = '.'
+        e.ruby ? @state[[e.x,e.y]] = 'R' : @state[[e.x,e.y]] = '.'
         @state['elk'] = @state['elk'] - [e]
       end
     end
