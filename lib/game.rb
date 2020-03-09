@@ -5,7 +5,10 @@ require_relative './elk.rb'
 require 'extra_print'
 
 class Game
-  def initialize
+  def initialize(status_window, game_window)
+    @status = status_window
+    @game = game_window
+    
     @state = Hash.new('.')
     @state[[3, 5]] = 'R'
   end
@@ -61,14 +64,17 @@ class Game
 
   def display
     a = (0..9).to_a
-    puts a.join
+    @game.setpos(0,0)
+    @game.addstr a.join
     (1..9).each do |y|
       a = [y]
       (1..60).each do |x|
         a += [@state[[x, y]].to_s]
       end
-      puts a.join
+      @game.setpos(y,0)
+      @game.addstr a.join
     end
+    @game.refresh
   end
 
   def add_element_to_state(element)
