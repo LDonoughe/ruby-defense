@@ -14,7 +14,7 @@ class Elk
   def update_position(state, x, y)
     x_old = @x
     y_old = @y
-    # use case statements here?
+    # FIXME: use case statements here?
     if x_old == 3 && !@ruby
       x_new = x || @x
       y_new = @y > 5 ? @y - 1 : @y + 1
@@ -24,7 +24,7 @@ class Elk
     end
     r = state['ruby']
     if (r.is_a? self.class) && (r != self)
-      coords = get_new_random_coordinates(@x,@y)
+      coords = get_new_random_coordinates(@x, @y)
       x_new = coords[0]
       y_new = coords[1]
     end
@@ -32,13 +32,12 @@ class Elk
     @y = y_new
 
     if state[[@x, @y]] == 'R'
-      @ruby = true 
+      @ruby = true
       state['ruby'] = self
     end
     state[[x_old, y_old]] = '.'
     state[[@x, @y]] = self
   end
-
 
   def to_s
     return 'ë' if @ruby == true
@@ -48,13 +47,13 @@ class Elk
 
   private
 
-  def get_new_random_coordinates(x,y)
+  def get_new_random_coordinates(x, y)
     x1 = x + flip
     y1 = y + flip
     if x1 < 60 && x1 > 0 && y1 < 10 && y1 > 0
-      [x1,y1]
+      [x1, y1]
     else
-      get_new_random_coordinates(x,y)
+      get_new_random_coordinates(x, y)
     end
   end
 
@@ -65,5 +64,4 @@ class Elk
     n = 1 if r == 1
     !n.nil? ? n : flip
   end
-
 end

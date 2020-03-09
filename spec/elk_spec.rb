@@ -4,12 +4,12 @@ require './elk.rb'
 
 RSpec.describe Elk do
   describe '#update_position' do
-    let(:state) { Hash.new('.')}
-    let(:elk) { Elk.new(60,5)}
+    let(:state) { Hash.new('.') }
+    let(:elk) { Elk.new(60, 5) }
 
     before do
       state['elk'] = [elk]
-      state[[3,5]] = 'R'
+      state[[3, 5]] = 'R'
     end
 
     it 'usually goes left' do
@@ -25,14 +25,14 @@ RSpec.describe Elk do
       expect(elk.y).to eq 5
       expect(state['ruby']).to eq elk
     end
-    
+
     it 'goes toward ruby' do
       elk.update_position(state, 3, 7)
       elk.update_position(state, false, false)
       expect(elk.x).to eq 3
       expect(elk.y).to eq 6
     end
-    
+
     context 'when ruby is already taken' do
       it 'stays within bounds' do
         e2 = Elk.new(60, 5)

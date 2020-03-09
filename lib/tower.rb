@@ -6,7 +6,7 @@ class Tower
   def initialize(x, y)
     @x = x
     @y = y
-    @range = 5
+    @range = 3
   end
 
   attr_reader :x
@@ -20,7 +20,7 @@ class Tower
     state['elk'].each do |elk|
       return elk if within_range(elk.x, elk.y)
     end
-    return false
+    false
   end
 
   def xa(x)
