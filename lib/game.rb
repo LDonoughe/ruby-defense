@@ -11,6 +11,7 @@ class Game
     
     @state = Hash.new('.')
     @state[[3, 5]] = 'R'
+    @state['ruby'] = [3,5]
   end
 
   attr_reader :state
@@ -35,7 +36,13 @@ class Game
     @state['tower'].each do |t|
       e = t.get_elk_within_range(@state)
       if e
-        e.ruby ? @state[[e.x,e.y]] = 'R' : @state[[e.x,e.y]] = '.'
+        if e.ruby 
+          @state[[e.x,e.y]] = 'R'
+          @state['ruby'] = [e.x, e.y]
+        else
+          @state[[e.x,e.y]] = '.'
+        end
+
         @state['elk'] = @state['elk'] - [e]
       end
     end

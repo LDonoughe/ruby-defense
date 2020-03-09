@@ -24,8 +24,16 @@ RSpec.describe Game do
     end
   end
   
+  describe 'ruby/crystal' do
+    it 'keeps track of state' do
+      g = Game.new(status_window, game_window)
+      state = g.send(:state)
+      expect(state['ruby']).to eq [3,5]
+    end
+  end
+  
   describe '#add_element_to_state' do
-  it 'creates array with element when it doesn\'t exist' do
+    it 'creates array with element when it doesn\'t exist' do
       g = Game.new(status_window, game_window)
 
       class Klass
