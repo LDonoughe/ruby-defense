@@ -28,3 +28,5 @@ run `ruby main.rb`
 [ ] Scoring mechanism/antlers
 
 [ ] (additional) tower purchasing
+
+[ ] [Quality of Life] Cleanup test output since curses mucked that up

@@ -10,7 +10,7 @@ RSpec.describe Elk do
     before do
       state['elk'] = [elk]
       state[[3, 5]] = 'R'
-      state['ruby'] = [3,5]
+      state['ruby'] = [3, 5]
     end
 
     it 'usually goes left' do
