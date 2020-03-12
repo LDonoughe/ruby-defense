@@ -21,9 +21,7 @@ cd /path/to/ruby-defense folder
 run `ruby main.rb`
 
 # TODO
-[ ] Fix Console spam method of displaying output
-
-[ ] Fix state management so game can enter loss state properly
+[ ] Make a failure screen instead of just throwing an error
 
 [ ] properly increase number of elk per wave as time goes on
 

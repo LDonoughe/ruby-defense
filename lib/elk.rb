@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative './tower.rb'
+
 class Elk
   def initialize(x, y)
     @x = x
@@ -14,26 +16,43 @@ class Elk
   def update_position(state, x, y)
     x_old = @x
     y_old = @y
-    # FIXME: use case statements here?
-    if x_old == 3 && !@ruby
-      x_new = x || @x
-      y_new = @y > 5 ? @y - 1 : @y + 1
-    else
-      y_new = y || @y
-      x_new = @ruby ? (x || @x + 1) : (x || @x - 1)
-    end
     r = state['ruby']
-    if (r.is_a? self.class) && (r != self)
+    if x && y
+      x_new = x
+      y_new = y
+    elsif (r.is_a? self.class) && (r != self)
+      # move randomly
       coords = get_new_random_coordinates(@x, @y)
       x_new = coords[0]
       y_new = coords[1]
+    elsif r == self
+      # move towards right of screen
+      x_new = x_old + 1
+      y_new = y_old
+    else
+      rx = r[0].to_i
+      ry = r[1].to_i
+      if x_old > 20 && rx < 10
+          # "charge" probably remove this cond
+          y_new = y || @y
+          x_new = @ruby ? (@x + 1) : (@x - 1)
+        else
+          # move closer to ruby
+        x_new = closer_to(x_old, rx)
+        y_new = closer_to(y_old, ry)
+      end
     end
+    
     @x = x_new
     @y = y_new
 
-    if state[[@x, @y]] == 'R'
+    current = state[[@x, @y]]
+    if current == 'R'
       @ruby = true
       state['ruby'] = self
+    end
+    if current.is_a? Tower
+      state['tower'] = state['tower'] - [current]
     end
     state[[x_old, y_old]] = '.'
     state[[@x, @y]] = self
@@ -43,6 +62,17 @@ class Elk
     return 'ë' if @ruby == true
 
     'e'
+  end
+
+  def closer_to(old_coord, ruby_coord)
+    case
+    when old_coord > ruby_coord
+      old_coord - 1
+    when old_coord == ruby_coord
+      old_coord
+    when old_coord < ruby_coord
+      old_coord + 1
+    end 
   end
 
   private

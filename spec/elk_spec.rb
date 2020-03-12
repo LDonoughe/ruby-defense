@@ -10,6 +10,7 @@ RSpec.describe Elk do
     before do
       state['elk'] = [elk]
       state[[3, 5]] = 'R'
+      state['ruby'] = [3,5]
     end
 
     it 'usually goes left' do
@@ -31,6 +32,11 @@ RSpec.describe Elk do
       elk.update_position(state, false, false)
       expect(elk.x).to eq 3
       expect(elk.y).to eq 6
+
+      elk.update_position(state, 1, 5)
+      elk.update_position(state, false, false)
+      expect(elk.x).to eq 2
+      expect(elk.y).to eq 5
     end
 
     context 'when ruby is already taken' do
