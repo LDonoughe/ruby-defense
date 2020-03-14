@@ -11,6 +11,7 @@ class Tower
 
   attr_reader :x
   attr_reader :y
+  attr_accessor :range
 
   def within_range(x, y)
     Math.sqrt(((@x - x)**2 + (@y - y)**2).abs) < @range
