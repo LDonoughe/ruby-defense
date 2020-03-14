@@ -25,8 +25,6 @@ run `ruby main.rb`
 
 [ ] properly increase number of elk per wave as time goes on
 
-[ ] Scoring mechanism/antlers
-
 [ ] (additional) tower purchasing
 
 [ ] [Quality of Life] Cleanup test output since curses mucked that up

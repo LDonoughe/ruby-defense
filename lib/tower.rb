@@ -6,7 +6,7 @@ class Tower
   def initialize(x, y)
     @x = x
     @y = y
-    @range = 3
+    @range = 4
   end
 
   attr_reader :x

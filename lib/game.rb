@@ -15,6 +15,7 @@ class Game
     @state = Hash.new('.')
     @state[[3, 5]] = 'R'
     @state['ruby'] = [3, 5]
+    @state['score'] = [0, 0] # [elk dispatched, points]
   end
 
   attr_reader :state
@@ -49,9 +50,15 @@ class Game
           @state[[e.x, e.y]] = '.'
         end
 
+        @state['score'][0] += 1 
+        @state['score'][1] += rand(4..15)
         @state['elk'] = @state['elk'] - [e]
       end
     end
+  end
+
+  def display_points
+    "#{@state['score'][0]} elk dispatched for #{@state['score'][1]} unspent points"
   end
 
   def add_elk(try: 0)
