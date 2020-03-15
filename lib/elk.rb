@@ -33,7 +33,7 @@ class Elk
     else
       rx = r[0].to_i
       ry = r[1].to_i
-      if x_old > 20 && rx < 10
+      if x_old > 10 && rx < 10
         # "charge" probably remove this cond
         y_new = y || @y
         x_new = @ruby ? (@x + 1) : (@x - 1)

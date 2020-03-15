@@ -4,9 +4,6 @@ require 'curses'
 
 require_relative './lib/game.rb'
 
-class ScreenSizeError < StandardError
-end
-
 Curses.init_screen
 begin
   status_window = Curses::Window.new(6, 60, 0, 0)
@@ -50,6 +47,16 @@ begin
     g.display
     g.attack_phase
   end
+rescue Failure
+  status_window.clear
+  status_window.setpos(0, 0)
+  status_window.addstr 'Failure: Elk have captured the ruby'
+  status_window.setpos(1, 0)
+  status_window.addstr g.display_final_points
+  status_window.setpos(2, 0)
+  status_window.addstr 'Press "q" + enter to quit'
+  status_window.refresh
+  status_window.getstr
 ensure
   Curses.close_screen
 end
