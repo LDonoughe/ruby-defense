@@ -21,8 +21,6 @@ cd /path/to/ruby-defense folder
 run `ruby main.rb`
 
 # TODO
-[ ] Make a failure screen instead of just throwing an error
-
 [ ] properly increase number of elk per wave as time goes on
 
 [ ] (additional) tower purchasing

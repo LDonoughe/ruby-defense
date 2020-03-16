@@ -55,6 +55,7 @@ rescue Failure
   status_window.addstr g.display_final_points
   status_window.setpos(2, 0)
   status_window.addstr 'Press "q" + enter to quit'
+  status_window.setpos(3, 0)
   status_window.refresh
   status_window.getstr
 ensure
