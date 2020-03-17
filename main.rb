@@ -3,6 +3,7 @@
 require 'curses'
 
 require_relative './lib/game.rb'
+require_relative './lib/store.rb'
 
 Curses.init_screen
 begin
@@ -12,7 +13,14 @@ begin
   g = Game.new(status_window, game_window)
   g.display
 
+  s = Store.new(g, status_window)
+
   (1..9_999_999).each do |wave|
+    if g.state['score'][1] > 99
+      status_window.setpos(2, 0)
+      status_window.addstr g.display_points
+      s.buy_phase
+    end
     status_window.setpos(0, 0)
     status_window.addstr("Defend the Ruby from the Elk. Wave #{wave}")
     status_window.refresh
@@ -21,16 +29,7 @@ begin
       status_window.addstr 'Place Towers'
       status_window.refresh
       (1..3).each do |n|
-        status_window.setpos(2, 0)
-        status_window.addstr "Placing Tower #{n}/3, input x coordinate"
-        status_window.setpos(3, 0)
-        x = status_window.getstr.to_i
-        status_window.setpos(4, 0)
-        status_window.addstr "Placing Tower #{n}/3, input y coordinate for x = #{x}"
-        status_window.setpos(5, 0)
-        y = status_window.getstr.to_i
-        g.place_tower(x, y)
-        g.display
+        s.add_tower(n)
       end
     end
     status_window.clear

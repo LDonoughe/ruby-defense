@@ -50,13 +50,17 @@ class Game
           @state[[e.x, e.y]] = '.'
         end
 
-        @state['score'][0] += 1 
+        @state['score'][0] += 1
         points = rand(4..15)
         @state['score'][1] += points
         @state['score'][2] += points
         @state['elk'] = @state['elk'] - [e]
       end
     end
+  end
+
+  def purchase_tower
+    @state['score'][1] = @state['score'][1] - 100 
   end
 
   def display_final_points

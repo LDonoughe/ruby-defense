@@ -23,6 +23,8 @@ run `ruby main.rb`
 # TODO
 [ ] properly increase number of elk per wave as time goes on
 
-[ ] (additional) tower purchasing
+[ ] Fix tower purchases sometimes not getting placed
+
+[ ] More options for point spending
 
 [ ] [Quality of Life] Cleanup test output since curses mucked that up
