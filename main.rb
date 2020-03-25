@@ -59,4 +59,5 @@ rescue Failure
   status_window.getstr
 ensure
   Curses.close_screen
+  puts g.state if ARGV[0] == 'debug'
 end
