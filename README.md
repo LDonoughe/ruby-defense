@@ -28,3 +28,5 @@ run `ruby main.rb`
 [ ] More options for point spending
 
 [ ] [Quality of Life] Cleanup test output since curses mucked that up
+
+[ ] Think about the consequences of elk stacking

@@ -44,7 +44,7 @@ RSpec.describe Elk do
       expect(elk2.y).to be >= 4
       expect(elk2.y).to be <= 6
       expect(state['ruby']).to eq elk
-      expect(state[[4,5]]).to eq elk
+      expect(state[[4, 5]]).to eq elk
     end
 
     it 'goes toward ruby' do

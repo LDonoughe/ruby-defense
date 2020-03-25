@@ -60,7 +60,7 @@ class Game
   end
 
   def purchase_tower
-    @state['score'][1] = @state['score'][1] - 100 
+    @state['score'][1] = @state['score'][1] - 100
   end
 
   def display_final_points
@@ -71,11 +71,31 @@ class Game
     "#{@state['score'][0]} elk dispatched for #{@state['score'][1]} unspent points"
   end
 
-  def add_elk(try: 0)
-    x = 60
+  def add_elk(col, n)
+    return true if n == 0
+
+    if n > 8
+      (1..9).each do |y|
+        e = Elk.new(col, y)
+        add_element_to_state(e)
+      end
+      add_elk(col - 1, n - 9)
+    else
+      (1..n).each do
+        add_elk_randomly(x: col)
+      end
+    end
+  end
+
+  def add_elk_randomly(try: 0, x: 60)
     y = rand(1..9)
     if @state[[x, y]].is_a? Elk
-      try < 5 ? (return add_elk(try: (try + 1))) : e = Elk.new(x - 1, y)
+      if try < 5
+        (return add_elk_randomly(try: (try + 1)))
+      else
+        x -= 1
+        e = Elk.new(x, y)
+      end
     else
       e = Elk.new(x, y)
     end

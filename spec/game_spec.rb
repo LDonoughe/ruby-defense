@@ -24,6 +24,35 @@ RSpec.describe Game do
     end
   end
 
+  describe '#add_elk' do
+    it 'fills columns' do
+      g = Game.new(status_window, game_window)
+      state = g.send(:state)
+      expect(state['elk']).to eq '.'
+      g.add_elk(60, 18)
+      expect(state['elk'].length).to eq 18
+
+      (1..9).each do |i|
+        expect(state[[60, i]].class).to eq Elk
+        expect(state[[59, i]].class).to eq Elk
+        expect(state[[58, i]]).to eq '.'
+      end
+    end
+
+    it 'works even unevenly' do
+      g = Game.new(status_window, game_window)
+      state = g.send(:state)
+      expect(state['elk']).to eq '.'
+      g.add_elk(60, 20)
+      expect(state['elk'].length).to eq 20
+
+      (1..9).each do |i|
+        expect(state[[60, i]].class).to eq Elk
+        expect(state[[59, i]].class).to eq Elk
+      end
+    end
+  end
+
   describe 'ruby/crystal' do
     it 'keeps track of state' do
       g = Game.new(status_window, game_window)

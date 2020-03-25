@@ -40,9 +40,7 @@ begin
     status_window.setpos(2, 0)
     status_window.addstr g.display_points
     status_window.refresh
-    (1..(wave * 5)).each do
-      g.add_elk
-    end
+    g.add_elk(60, (wave * 5))
     g.display
     g.attack_phase
   end

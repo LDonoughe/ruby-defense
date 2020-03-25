@@ -23,7 +23,7 @@ class Store
     if n
       @status_window.addstr "Placing Tower #{n}/3, input x coordinate"
     else
-      @status_window.addstr "Placing Tower, input x coordinate"
+      @status_window.addstr 'Placing Tower, input x coordinate'
     end
     @status_window.setpos(3, 0)
     x = @status_window.getstr.to_i
@@ -31,7 +31,7 @@ class Store
     if n
       @status_window.addstr "Placing Tower #{n}/3, input y coordinate for x = #{x}"
     else
-      @status_window.addstr "Placing Tower, input y coordinate"
+      @status_window.addstr 'Placing Tower, input y coordinate'
     end
     @status_window.setpos(5, 0)
     y = @status_window.getstr.to_i
