@@ -47,6 +47,22 @@ RSpec.describe Elk do
       expect(state[[4, 5]]).to eq elk
     end
 
+    it 'moves right after taking the ruby even if there is another elk there' do
+      elk2 = Elk.new(60, 5)
+      elk.update_position(state, 3, 5)
+      elk2.update_position(state, 4, 5)
+      expect(elk.x).to eq 3
+      expect(elk.y).to eq 5
+      expect(elk2.x).to eq 4
+      expect(elk2.y).to eq 5
+      elk.update_position(state, false, false)
+      expect(elk.x).to eq 4
+      expect(elk.y).to eq 5
+      expect(elk.ruby).to eq true
+      expect(state['ruby']).to eq elk
+      expect(state[[4, 5]]).to eq elk
+    end
+
     it 'goes toward ruby' do
       elk.update_position(state, 3, 7)
       elk.update_position(state, false, false)
