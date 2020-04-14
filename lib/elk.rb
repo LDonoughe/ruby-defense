@@ -7,11 +7,13 @@ class Elk
     @x = x
     @y = y
     @ruby = false
+    @power = 1
   end
 
   attr_reader :x
   attr_reader :y
   attr_reader :ruby
+  attr_accessor :power
 
   def update_position(state, x, y)
     x_old = @x

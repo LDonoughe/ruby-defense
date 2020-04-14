@@ -61,6 +61,26 @@ RSpec.describe Game do
     end
   end
 
+  describe '#towers_attack' do
+    let(:game) { Game.new(status_window, game_window) }
+
+    it 'reduces elk power if they are within range of a tower' do
+      state = game.send(:state)
+      elk = Elk.new(1, 1)
+      elk4 = Elk.new(2, 1)
+      elk4.power = 4
+      tower = Tower.new(1, 2)
+      tower2 = Tower.new(2, 2)
+      state['elk'] = [elk, elk4]
+      state['tower'] = [tower, tower2]
+      expect(state['elk'][0].power).to eq 1
+      expect(state['elk'][1].power).to eq 4
+      game.towers_attack
+      expect(state['elk'].length).to eq 1
+      expect(state['elk'][0].power).to eq 3
+    end
+  end
+
   describe '#add_element_to_state' do
     it 'creates array with element when it doesn\'t exist' do
       g = Game.new(status_window, game_window)

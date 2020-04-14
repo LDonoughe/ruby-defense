@@ -21,12 +21,18 @@ cd /path/to/ruby-defense folder
 run `ruby main.rb`
 
 # TODO
-[ ] properly increase number of elk per wave as time goes on
+Properly increase number of elk per wave as time goes on
 
-[ ] Fix tower purchases sometimes not getting placed
+Fix tower purchases sometimes not getting placed
 
-[ ] More options for point spending
+More options for point spending
 
-[ ] [Quality of Life] Cleanup test output since curses mucked that up
+[Quality of Life] Cleanup test output since curses mucked that up
 
-[ ] Think about the consequences of elk stacking
+Think about the consequences of elk stacking
+
+Rebrand to Elk Defense
+
+Add a title/splash screen. Ascii Elk Art?
+
+Add lore

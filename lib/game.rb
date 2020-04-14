@@ -54,7 +54,11 @@ class Game
         points = rand(4..15)
         @state['score'][1] += points
         @state['score'][2] += points
-        @state['elk'] = @state['elk'] - [e]
+        if e.power > 1
+          e.power -= 1
+        else
+          @state['elk'] = @state['elk'] - [e]
+        end
       end
     end
   end
