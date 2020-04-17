@@ -3,11 +3,11 @@
 require_relative './tower.rb'
 
 class Elk
-  def initialize(x, y)
+  def initialize(x, y, power = 1)
     @x = x
     @y = y
+    @power = power
     @ruby = false
-    @power = 1
   end
 
   attr_reader :x

@@ -16,6 +16,7 @@ class Game
     @state[[3, 5]] = 'R'
     @state['ruby'] = [3, 5]
     @state['score'] = [0, 0, 0] # [elk dispatched, points, total points]
+    @state['power'] = [1,1]
   end
 
   attr_reader :state
@@ -75,12 +76,16 @@ class Game
     "#{@state['score'][0]} elk dispatched for #{@state['score'][1]} unspent points"
   end
 
+  def change_power(min,max)
+    @state['power'] = [min, max]
+  end
+
   def add_elk(col, n)
     return true if n == 0
 
     if n > 8
       (1..9).each do |y|
-        e = Elk.new(col, y)
+        e = Elk.new(col, y, get_elk_power)
         add_element_to_state(e)
       end
       add_elk(col - 1, n - 9)
@@ -98,10 +103,10 @@ class Game
         (return add_elk_randomly(try: (try + 1)))
       else
         x -= 1
-        e = Elk.new(x, y)
+        e = Elk.new(x, y, get_elk_power)
       end
     else
-      e = Elk.new(x, y)
+      e = Elk.new(x, y, get_elk_power)
     end
     add_element_to_state(e)
   end
@@ -141,5 +146,11 @@ class Game
 
     @state[element.class.to_s.downcase] = state_array
     @state[[element.x, element.y]] = element
+  end
+
+  private
+
+  def get_elk_power
+    rand(@state['power'][0]..@state['power'][1])
   end
 end

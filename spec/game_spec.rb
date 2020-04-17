@@ -24,6 +24,16 @@ RSpec.describe Game do
     end
   end
 
+  describe '#change_power' do
+    it 'changes accordingly' do
+      g = Game.new(status_window, game_window)
+      state = g.send(:state)
+      expect(state['power']).to eq [1,1]
+      g.change_power(2,5)
+      expect(state['power']).to eq [2,5]
+    end
+  end
+
   describe '#add_elk' do
     it 'fills columns' do
       g = Game.new(status_window, game_window)
@@ -50,6 +60,25 @@ RSpec.describe Game do
         expect(state[[60, i]].class).to eq Elk
         expect(state[[59, i]].class).to eq Elk
       end
+    end
+
+    it 'uses variable power appropriately' do
+      g = Game.new(status_window, game_window)
+      g.change_power(2,3)
+      state = g.send(:state)
+      expect(state['elk']).to eq '.'
+      g.add_elk(60, 100)
+      expect(state['elk'].length).to eq 100
+
+      two = false
+      three = false
+      state['elk'].each do |elk|
+        break if two && three
+        two = true if elk.power == 2
+        three = true if elk.power == 3
+      end
+      expect(two).to be true
+      expect(three).to be true
     end
   end
 

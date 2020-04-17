@@ -32,6 +32,9 @@ begin
         s.add_tower(n)
       end
     end
+    if wave % 5 == 0
+      g.change_power([wave/10,1].max,[wave/5,1].max)
+    end
     status_window.clear
     status_window.setpos(0, 0)
     status_window.addstr 'Elk will now attack the ruby'

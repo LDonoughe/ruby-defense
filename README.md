@@ -21,7 +21,7 @@ cd /path/to/ruby-defense folder
 run `ruby main.rb`
 
 # TODO
-Properly increase number of elk per wave as time goes on
+Properly increase wave strength as time goes on
 
 Fix tower purchases sometimes not getting placed
 
