@@ -52,7 +52,7 @@ class Game
         end
 
         @state['score'][0] += 1
-        points = rand(4..15)
+        points = e.power*5
         @state['score'][1] += points
         @state['score'][2] += points
         if e.power > 1
